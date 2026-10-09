@@ -1,10 +1,18 @@
 import '../css/components/Main.css';
+import markAvatar from '../assets/images/avatar-mark-webber.webp';
+import angelaAvatar from '../assets/images/avatar-angela-gray.webp';
+import jacobAvatar from '../assets/images/avatar-jacob-thompson.webp';
+import rizkyAvatar from '../assets/images/avatar-rizky-hasanuddin.webp';
+import kimberlyAvatar from '../assets/images/avatar-kimberly-smith.webp';
+import nathanAvatar from '../assets/images/avatar-nathan-peterson.webp';
+import annaAvatar from '../assets/images/avatar-anna-kim.webp';
+import chessPicture from '../assets/images/image-chess.webp';
 
-const notifications = [
+export const initialNotifications = [
     {
         id: 1,
         name: "Mark Webber",
-        avatar: "avatar-mark-webber.webp",
+        avatar: markAvatar,
         action: "reacted to your recent post",
         target: "My first tournament today!",
         time: "1m ago",
@@ -13,7 +21,7 @@ const notifications = [
     {
         id: 2,
         name: "Angela Gray",
-        avatar: "avatar-angela-gray.webp",
+        avatar: angelaAvatar,
         action: "followed you",
         time: "5m ago",
         unread: true,
@@ -21,7 +29,7 @@ const notifications = [
     {
         id: 3,
         name: "Jacob Thompson",
-        avatar: "avatar-jacob-thompson.webp",
+        avatar: jacobAvatar,
         action: "has joined your group",
         target: "Chess Club",
         time: "1 day ago",
@@ -30,7 +38,7 @@ const notifications = [
     {
         id: 4,
         name: "Rizky Hasanuddin",
-        avatar: "avatar-rizky-hasanuddin.webp",
+        avatar: rizkyAvatar,
         action: "sent you a private message",
         time: "5 days ago",
         unread: false,
@@ -40,16 +48,16 @@ const notifications = [
     {
         id: 5,
         name: "Kimberly Smith",
-        avatar: "avatar-kimberly-smith.webp",
+        avatar: kimberlyAvatar,
         action: "commented on your picture",
         time: "1 week ago",
         unread: false,
-        picture: "image-chess.webp",
+        picture: chessPicture,
     },
     {
         id: 6,
         name: "Nathan Peterson",
-        avatar: "avatar-nathan-peterson.webp",
+        avatar: nathanAvatar,
         action: "reacted to your recent post",
         target: "5 end-game strategies to increase your win rate",
         time: "2 weeks ago",
@@ -58,7 +66,7 @@ const notifications = [
     {
         id: 7,
         name: "Anna Kim",
-        avatar: "avatar-anna-kim.webp",
+        avatar: annaAvatar,
         action: "left the group",
         target: "Chess Club",
         time: "2 weeks ago",
@@ -66,11 +74,47 @@ const notifications = [
     },
 ];
 
-const Main = () => {
-    
-    return (  
+const Main = ({ notifications, isMarkingAllAsRead }) => {
+
+    return (
         <main className="main">
-            
+            {notifications.map((card) => (
+                <article className={`card${card.unread ? ' card--unread' : ''}`} key={card.id}>
+                    <div className="profile">
+                        <img src={card.avatar} alt={`${card.name} profile`} />
+                        {card.unread && (
+                            <span
+                                className={`profile__dot${
+                                    isMarkingAllAsRead ? ' profile__dot--fading' : ''
+                                }`}
+                                aria-hidden="true"
+                            />
+                        )}
+                    </div>
+                    <div className="description__card">
+                        <div className="description__top">
+                            <p className="description__text">
+                                <span className="description__name">{card.name}</span>
+                                <span className="description__action">{card.action}</span>
+                                {card.target && (
+                                    <span className="description__target">{card.target}</span>
+                                )}
+                            </p>
+                            <span className="description__time">{card.time}</span>
+                        </div>
+                        {card.message && (
+                            <p className="description__message">{card.message}</p>
+                        )}
+                    </div>
+                    {card.picture && (
+                        <img
+                            className="card__picture"
+                            src={card.picture}
+                            alt="Related notification"
+                        />
+                    )}
+                </article>
+            ))}
         </main>
     );
 }

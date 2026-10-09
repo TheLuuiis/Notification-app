@@ -4,5 +4,210 @@
     min-height: 0;
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    gap: 10px;
+}
+
+/* Card */
+.card {
+    width: 100%;
+    padding: clamp(14px, 1.5vw, 18px) clamp(14px, 1.8vw, 20px);
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    gap: clamp(12px, 1.5vw, 16px);
+    border-radius: 10px;
+    background-color: var(--backgroundWhite);
+    transition: background-color 220ms ease, opacity 220ms ease, transform 220ms ease;
+}
+
+.card--unread {
+    background-color: hsl(210, 60%, 98%);
+}
+
+.card .profile {
+    position: relative;
+    flex: 0 0 auto;
+    border-radius: 50%;
+}
+
+.card .profile img {
+    width: clamp(45px, 4vw, 60px);
+    height: clamp(45px, 4vw, 60px);
+    border: none;
+    object-fit: cover;
+}
+
+.profile__dot {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: clamp(9px, 0.8vw, 13px);
+    height: clamp(9px, 0.8vw, 13px);
+    border: 2px solid var(--backgroundWhite);
+    border-radius: 50%;
+    background-color: var(--pointRed);
+    transform: translate(28%, -28%) scale(1);
+    transform-origin: center;
+    transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.profile__dot--fading {
+    opacity: 0;
+    transform: translate(28%, -28%) scale(0.35);
+}
+
+.description__card {
+    flex: 1 1 auto;
+    min-width: 0;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(10px, 1.2vw, 12px);
+    color: var(--textGray);
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1.4;
+}
+
+.description__top {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.description__text {
+    display: block;
+    min-width: 0;
+    margin: 0;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.description__card p span,
+.description__text span {
+    display: inline;
+}
+
+.description__name {
+    color: var(--textBlack);
+    font-weight: 800;
+    margin-right: 4px;
+}
+
+.description__action {
+    color: var(--textGray);
+    font-weight: 500;
+    margin-right: 4px;
+}
+
+.description__target {
+    color: var(--textBlue);
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.description__time {
+    display: block;
+    color: var(--textGray);
+    font-size: clamp(13px, 1.1vw, 15px);
+    font-weight: 400;
+    text-align: start;
+    line-height: 1.3;
+}
+
+.description__message {
+    margin-top: 2px;
+    padding: clamp(12px, 1.5vw, 16px) clamp(14px, 1.8vw, 18px);
+    border: 1px solid hsl(205, 33%, 90%);
+    border-radius: 5px;
+    color: var(--textGray);
+    background-color: var(--backgroundWhite);
+    width: 100%;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+}
+
+.card__picture {
+    width: clamp(40px, 3.2vw, 45px);
+    height: clamp(40px, 3.2vw, 45px);
+    margin-left: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .main {
+        gap: 8px;
+    }
+
+    .card {
+        align-items: flex-start;
+        padding: 14px;
+    }
+
+    .description__card {
+        gap: 10px;
+    }
+
+    .description__target {
+        white-space: normal;
+    }
+
+    .card__picture {
+        margin-top: 2px;
+    }
+}
+
+@media (max-width: 520px) {
+    .card {
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .card .profile img {
+        width: 42px;
+        height: 42px;
+    }
+
+    .profile__dot {
+        border-width: 1.5px;
+    }
+
+    .description__card {
+        gap: 8px;
+    }
+
+    .description__message {
+        padding: 12px 14px;
+    }
+
+    .card__picture {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+@media (max-width: 380px) {
+    .card {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .description__card {
+        font-size: 13px;
+    }
+
+    .description__name,
+    .description__action,
+    .description__target {
+        line-height: 1.4;
+    }
+
+    .description__top {
+        gap: 2px;
+    }
+
+    .description__message {
+        padding: 10px 12px;
+    }
 }

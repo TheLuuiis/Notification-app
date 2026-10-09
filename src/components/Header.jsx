@@ -1,14 +1,23 @@
 import '../css/components/Header.css';
 
-const Header = () => {
+const Header = ({ unreadCount, onMarkAllAsRead, isMarkingAllAsRead }) => {
     return (  
         <header>
             <nav>
                 <div className="container__notifi">
                     <h3>Notifications</h3>
-                    <p>3</p>
+                    <p key={unreadCount} className="notification-count">
+                        {unreadCount}
+                    </p>
                 </div>
-                <a href="#">Mark all as read</a>
+                <button
+                    type="button"
+                    className="mark-all-read"
+                    onClick={onMarkAllAsRead}
+                    disabled={isMarkingAllAsRead}
+                >
+                    Mark all as read
+                </button>
             </nav>
         </header>
     );
